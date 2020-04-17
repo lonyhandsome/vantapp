@@ -9,24 +9,20 @@
   text-align: left;
   margin-top: 2vh;
 }
-.van-icon {
-  float: left;
-  margin-top: 0.5vh;
-}
 </style>
 <template>
   <div>
-    <div class="backTo" v-on:click="back">
+    <van-nav-bar :title="objectId" left-text="返回" left-arrow @click-left="back" />
+    <!-- <div class="backTo" v-on:click="back">
       <van-icon name="arrow-left" />
       <span>返回</span>
-    </div>
+    </div>-->
     <img
       src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1587034921252&di=2d936bac128170becd4add57811d4f5b&imgtype=0&src=http%3A%2F%2Fpic.616pic.com%2Fys_bnew_img%2F00%2F32%2F68%2FxOz4WR9vaU.jpg"
       width="100%"
       style=" marginTop: 2vh"
     />
     <div class="info">{{this.objectId}}</div>
-   
   </div>
 </template>
   <script>

@@ -1,4 +1,8 @@
 <style scoped>
+* {
+  /* background-color: royalblue; */
+  overflow: hidden;
+}
 .amap-wrapper {
   margin-top: 5vh;
   width: 100vw;
@@ -18,79 +22,68 @@
   margin-bottom: 3vh;
   margin-left: 3.5vh;
 }
-.van-popup {
-  width: 70vw;
-  height: 100vh;
-}
-.clear {
-  clear: both;
-}
-
-.my-swipe .van-swipe-item {
-  margin-top: 1vh;
-  color: #fff;
-  font-size: 20px;
-  line-height: 150px;
-  text-align: center;
-  background-color: gray;
-}
 </style>
 
 <template>
   <div>
-    <div id="top">
-      <van-icon name="manager" size="1.3rem" @click="showPopup" />
-    </div>
-    <div id="title">平头速运</div>
-    <div class="clear"></div>
-    <van-popup v-model="show" position="left">今日</van-popup>
-
-    <van-notice-bar text="概雷博彩,超多电子首存返水1.8起公司入款2%笔笔送" left-icon="volume-o" mode="closeable" />
-
-    <van-tabs v-model="activeName" animated duration="0.8" type="line" swipeable>
-      <van-tab title="实时订单" name="a">
-        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item>广告位出租</van-swipe-item>
-          <van-swipe-item>广告位出租</van-swipe-item>
-          <van-swipe-item>广告位出租</van-swipe-item>
-          <van-swipe-item>广告位出租</van-swipe-item>
-        </van-swipe>
-
-        <van-pull-refresh v-model="refreshing" @refresh="onRefresh" success-text="刷新成功">
-          <van-list v-model="loading" :finished="finished" @load="onLoad">
-            <van-cell v-for="item in content" :key="item.objectId">
-              <div style="height:5vh" @click="checkInfo(item.objectId)">{{item.name}}</div>
-            </van-cell>
-          </van-list>
-        </van-pull-refresh>
-      </van-tab>
-      <van-tab title="标签 1" name="a">
-        <van-empty description="描述文字" />
-      </van-tab>
-
-      <van-tab title="标签 1" name="a">
-        <van-empty description="描述文字" />
-      </van-tab>
-      <van-tab title="标签 1" name="a">
-        <van-empty description="描述文字" />
-      </van-tab>
-      <van-tab title="标签 1" name="a">
-        <van-empty description="描述文字" />
-      </van-tab>
-      <van-tab title="标签 1" name="a">
-        <van-empty description="描述文字" />
-      </van-tab>
-    </van-tabs>
-    <MyBottom></MyBottom>
+    <Top></Top>
+    <van-row>
+      <van-tabs
+        v-model="activeName"
+        animated
+        duration="0.8"
+        type="line"
+        swipeable
+        sticky
+        offset-top="110"
+      >
+        <van-tab title="实时订单" name="a">
+          <div>
+            <Swipe />
+          </div>
+          <div>
+            <van-pull-refresh v-model="refreshing" @refresh="onRefresh" success-text="刷新成功">
+              <van-list v-model="loading" :finished="finished" @load="onLoad">
+                <van-cell v-for="item in content" :key="item.objectId">
+                  <div style="height:5vh" @click="checkInfo(item.objectId)">{{item.name}}</div>
+                </van-cell>
+              </van-list>
+            </van-pull-refresh>
+          </div>
+        </van-tab>
+        <van-tab title="标签 1" name="a">
+          <van-empty description="描述文字" />
+        </van-tab>
+        <van-tab title="标签 1" name="a">
+          <van-empty description="描述文字" />
+        </van-tab>
+        <van-tab title="标签 1" name="a">
+          <van-empty description="描述文字" />
+        </van-tab>
+        <van-tab title="标签 1" name="a">
+          <van-empty description="描述文字" />
+        </van-tab>
+        <van-tab title="标签 1" name="a">
+          <van-empty description="描述文字" />
+        </van-tab>
+      </van-tabs>
+    </van-row>
+    <van-row>
+      <MyBottom style="marginTop:10vh" />
+    </van-row>
   </div>
 </template>
 
 <script>
 import MyBottom from "../components/bottom";
+import Top from "../components/top";
+import Swipe from "../components/swipe";
 import util from "../libs/util";
 export default {
   components: {
-    MyBottom
+    MyBottom,
+    Top,
+    Swipe
   },
   data() {
     return {
