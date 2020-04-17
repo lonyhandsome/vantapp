@@ -1,2 +1,0 @@
-# vantapp
-vant app
